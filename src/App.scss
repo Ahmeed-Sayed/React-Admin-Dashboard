@@ -1,0 +1,31 @@
+@import "./styles/colors";
+
+body{
+  // background-color: $dark-primary-color;
+  color: white;
+  margin: 0;
+}
+
+
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+
+}
+.sidebar {
+  height: 100vh;
+}
+
+.active{
+  color: #7a14ee !important;
+}
+

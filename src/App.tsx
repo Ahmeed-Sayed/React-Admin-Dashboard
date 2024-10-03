@@ -1,35 +1,98 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {
+  Box,
+  createTheme,
+  CssBaseline,
+  PaletteMode,
+  ThemeProvider,
+} from "@mui/material";
+import "./App.scss";
+import Header from "./components/Header/Header";
+import SidebarComponent from "./components/Sidebar/Sidebar";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { useState } from "react";
+import ManageTeam from "./pages/ManageTeam/ManageTeam";
+import Contacts from "./pages/Contacts/Contacts";
+import Invoices from "./pages/Invoices/Invoices";
+import Calendar from "./pages/Calendar/Calendar";
+import ProfileForm from "./pages/ProfileForm/ProfileForm";
+import FAQ from "./pages/FAQ/FAQ";
+import BarChart from "./pages/BarChart/BarChart";
+import PieChart from "./pages/PieChart/PieChart";
+import GeographyChart from "./pages/GeographyChart/GeographyChart";
+import LineChart from "./pages/LineChart/LineChart";
+import Layout from "./Layout";
+// import { darkTheme, lightTheme } from "./utils/theme";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [mode, setMode] = useState<PaletteMode>(() => {
+    const savedMode = localStorage.getItem("siteMode") as PaletteMode;
+    return savedMode || "light";
+  });
+
+  const theme = createTheme({
+    palette: {
+      mode: mode,
+      secondary: { main: "#11ca9c" },
+      background: { default: "#071941", paper: "#2d3649" },
+    },
+    typography: {
+      fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+      fontSize: 12,
+      h1: {
+        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontSize: 40,
+      },
+      h2: {
+        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontSize: 32,
+      },
+      h3: {
+        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontSize: 24,
+      },
+      h4: {
+        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontSize: 20,
+      },
+      h5: {
+        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontSize: 16,
+      },
+      h6: {
+        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontSize: 14,
+      },
+    },
+  });
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout setMode={setMode} />,
+      children: [
+        { path: "/", element: <Dashboard /> },
+        { path: "/team", element: <ManageTeam /> },
+        { path: "/contacts", element: <Contacts /> },
+        { path: "/invoices", element: <Invoices /> },
+        { path: "/form", element: <ProfileForm /> },
+        { path: "/calendar", element: <Calendar /> },
+        { path: "/faq", element: <FAQ /> },
+        { path: "/bar", element: <BarChart /> },
+        { path: "/pie", element: <PieChart /> },
+        { path: "/line", element: <LineChart /> },
+        { path: "/geography", element: <GeographyChart /> },
+      ],
+    },
+  ]);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
