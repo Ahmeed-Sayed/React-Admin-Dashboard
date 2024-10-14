@@ -90,3 +90,12 @@ export const darkTheme: CustomThemeOptions = {
     fontFamily: "Roboto, Arial, sans-serif",
   },
 };
+
+export interface EventType {
+  id: string;
+  title: string;
+  start: string;
+  end: string;
+  allDay: boolean;
+}
+
