@@ -8,14 +8,15 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import faqData from "../../data/mockDataFAQ.tsx";
+import PageHeader from "../../components/PageHeader/PageHeader.tsx";
 // Business-oriented FAQ data
 
 export default function FAQ() {
   return (
     <Box minWidth="100%">
-      <Typography variant="h4" component="h1" gutterBottom>
-        Frequently Asked Questions
-      </Typography>
+
+      <PageHeader title="FAQ" subTitle="Frequently Asked Questions Page" />
+
       {faqData.map((faq, index) => (
         <Accordion
           key={index}

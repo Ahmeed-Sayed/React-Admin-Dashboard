@@ -24,7 +24,7 @@ const CustomModal: React.FC<CustomModalProps> = ({ children, ...props }) => {
           borderRadius: 2,
         }}
       >
-        <Typography variant="h3" component="p">
+        <Typography variant="h3" component="p" mb={2}>
           {title}
         </Typography>
 

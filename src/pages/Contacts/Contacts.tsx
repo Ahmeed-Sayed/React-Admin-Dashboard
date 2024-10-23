@@ -1,6 +1,7 @@
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 import mockDataContacts from "../../data/mockDataContacts";
+import PageHeader from "../../components/PageHeader/PageHeader";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID" },
@@ -21,6 +22,11 @@ const columns: GridColDef[] = [
 
 export default function Contacts() {
   return (
+    <>
+    <PageHeader
+        title="CONTACTS"
+        subTitle="List of Contacts for Future Reference"
+      />
     <Box sx={{ height: "75vh", width: "100%" }}>
       <DataGrid
         rows={mockDataContacts}
@@ -43,5 +49,6 @@ export default function Contacts() {
         }}
       />
     </Box>
+    </>
   );
 }

@@ -1,12 +1,9 @@
 import {
   Box,
   CircularProgress,
-  ListItem,
   Stack,
-  styled,
   Typography,
 } from "@mui/material";
-import React from "react";
 import MailIcon from "@mui/icons-material/Mail";
 export default function PerformanceBox() {
   return (

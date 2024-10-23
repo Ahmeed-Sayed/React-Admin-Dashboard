@@ -17,11 +17,11 @@ import Invoices from "./pages/Invoices/Invoices";
 import Calendar from "./pages/Calendar/Calendar";
 import ProfileForm from "./pages/ProfileForm/ProfileForm";
 import FAQ from "./pages/FAQ/FAQ";
-import BarChart from "./pages/BarChart/BarChart";
 import PieChart from "./pages/PieChart/PieChart";
 import GeographyChart from "./pages/GeographyChart/GeographyChart";
 import LineChart from "./pages/LineChart/LineChart";
 import Layout from "./Layout";
+import FoodBarChart from "./pages/FoodBarChart/FoodBarChart";
 // import { darkTheme, lightTheme } from "./utils/theme";
 
 function App() {
@@ -77,7 +77,7 @@ function App() {
         { path: "/form", element: <ProfileForm /> },
         { path: "/calendar", element: <Calendar /> },
         { path: "/faq", element: <FAQ /> },
-        { path: "/bar", element: <BarChart /> },
+        { path: "/bar", element: <FoodBarChart /> },
         { path: "/pie", element: <PieChart /> },
         { path: "/line", element: <LineChart /> },
         { path: "/geography", element: <GeographyChart /> },

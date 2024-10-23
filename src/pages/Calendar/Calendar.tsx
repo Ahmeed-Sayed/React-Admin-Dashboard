@@ -1,42 +1,40 @@
 /**
  * Calendar Component
- * 
+ *
  * This component implements a full-featured calendar using FullCalendar and Material-UI.
  * It allows users to view, add, and delete events in various calendar views.
- * 
+ *
  * Key features:
  * - Display events in month, week, day, and list views
  * - Add new events through a modal form
  * - Delete events with confirmation
  * - Show a sidebar with a list of current events
- * 
+ *
  * Implementation approach:
  * 1. State Management:
  *    - Use React useState for local state (modalOpen, selectedDate, currentEvents)
  *    - Rely on FullCalendar's internal state for calendar events
- * 
+ *
  * 2. Event Handling:
  *    - Add events: Open a modal with a form, submit to add to FullCalendar
  *    - Delete events: Confirm via dialog, then remove from FullCalendar
  *    - Update currentEvents state using FullCalendar's eventsSet callback
- * 
+ *
  * 3. Date Formatting:
  *    - Use a custom safeFormatDate function to handle various date input types
  *    - Ensure consistent date display across the application
- * 
+ *
  * 4. Error Handling:
  *    - Implement error checking in date formatting to prevent rendering issues
  *    - Use TypeScript for type checking and to catch potential errors early
- * 
+ *
  * 5. Performance Considerations:
  *    - Rely on FullCalendar's optimized rendering for large sets of events
  *    - Minimize state updates by using FullCalendar's built-in event management
- * 
+ *
  * Note: Ensure all required dependencies are installed, including @fullcalendar packages,
  * @mui components, formik, and yup for form handling and validation.
  */
-
-
 
 import { useState } from "react";
 import FullCalendar from "@fullcalendar/react";
@@ -46,19 +44,20 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { EventType } from "../../utils/interfaces";
-import CustomModal from "../../components/CustomModal/Custommodal.tsx";
+import CustomModal from "../../components/CustomModal/CustomModal.tsx";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import PageHeader from "../../components/PageHeader/PageHeader.tsx";
 
 /**
  * Initial values for the event creation form
  */
 const initialValues: {
   title: string;
-  endDate: string;
+  endDate: string; // Change type to string for consistency
 } = {
   title: "",
-  endDate: new Date().toISOString().split("T")[0],
+  endDate: new Date().toISOString().split("T")[0], // Set to today's date in string format
 };
 
 const eventValidationSchema = Yup.object().shape({
@@ -143,146 +142,168 @@ export default function Calendar() {
   };
 
   return (
-    <Box display="flex">
-      {/* CustomModal for adding events */}
-      <CustomModal
-        title="Add Event"
-        open={addModalOpen}
-        onClose={() => setAddModalOpen(false)}
-      >
-        <Formik
-          onSubmit={handleFormSubmit}
-          initialValues={initialValues}
-          validationSchema={eventValidationSchema}
+    <>
+      <PageHeader title="Calendar" subTitle="Full Calendar Interactive Page" />
+      <Box display="flex">
+        {/* CustomModal for adding events */}
+        <CustomModal
+          title="Add Event"
+          open={addModalOpen}
+          onClose={() => setAddModalOpen(false)}
         >
-          {({
-            handleBlur,
-            touched,
-            errors,
-            handleChange,
-            handleSubmit,
-            values,
-          }) => (
-            <form onSubmit={handleSubmit}>
-              <Box display="flex" flexDirection="column" gap="1.5rem">
-                <TextField
-                  id="title"
-                  name="title"
-                  label="Event Title"
-                  fullWidth
-                  required
-                  value={values.title}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={!!touched.title && !!errors.title}
-                  helperText={touched.title && errors.title}
-                />
-
-                <TextField
-                  id="endDate"
-                  name="endDate"
-                  label="End Date"
-                  type="date"
-                  fullWidth
-                  required
-                  value={values.endDate}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={!!touched.endDate && !!errors.endDate}
-                />
-              </Box>
-              <Box display="flex" justifyContent="end" mt="1rem" gap="1rem">
-                <Button color="secondary" variant="contained" type="submit" sx={{fontSize: "0.8rem"}}>
-                  Create New User
-                </Button>
-                <Button color="error" variant="contained" onClick={() => setAddModalOpen(false)} sx={{fontSize: "0.8rem"}}>
-                  Cancel
-                </Button>
-              </Box>
-            </form>
-          )}
-        </Formik>
-      </CustomModal>
-
-      {/* CustomModal for deleting events */}
-      <CustomModal
-        title="Delete Event"
-        open={deleteModalOpen}
-        onClose={() => setDeleteModalOpen(false)}
-      >
-        <Typography variant="h4" my={3} component="p" gutterBottom>
-          Are you sure you want to delete the event '{eventToDelete?.title}'?
-        </Typography>
-        <Box display="flex" justifyContent="flex-end" mt={2}>
-          <Button
-            onClick={() => setDeleteModalOpen(false)}
-            color="primary"
-            sx={{ mr: 1, fontSize: "0.8rem" }}
+          <Formik
+            onSubmit={handleFormSubmit}
+            initialValues={initialValues}
+            validationSchema={eventValidationSchema}
           >
-            Cancel
-          </Button>
-          <Button onClick={handleDeleteEvent} color="error" variant="contained" sx={{fontSize: "0.8rem"}}>
-            Delete
-          </Button>
-        </Box>
-      </CustomModal>
+            {({
+              handleBlur,
+              touched,
+              errors,
+              handleChange,
+              handleSubmit,
+              values,
+            }) => (
+              <form onSubmit={handleSubmit}>
+                <Box display="flex" flexDirection="column" gap="1.5rem">
+                  <TextField
+                    id="title"
+                    name="title"
+                    label="Event Title"
+                    fullWidth
+                    required
+                    value={values.title}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={!!touched.title && !!errors.title}
+                    helperText={touched.title && errors.title}
+                  />
 
-      {/* Sidebar to display list of events */}
-      <Box
-        flex="1 1 20%"
-        bgcolor="background.paper"
-        mr={2}
-        borderRadius={2}
-        p={2}
-      >
-        <Typography variant="h4" mb={2}>
-          Events
-        </Typography>
-        {currentEvents.map((event: EventType) => {
-          return (
-            <Box
-              key={`${event.id}-${event.start}`}
-              p={2}
-              mb={2}
-              bgcolor="secondary.main"
+                  <TextField
+                    id="endDate"
+                    name="endDate"
+                    label="End Date"
+                    type="date"
+                    fullWidth
+                    required
+                    value={values.endDate}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={!!touched.endDate && !!errors.endDate}
+                    helperText={touched.endDate && errors.endDate}
+                  />
+                </Box>
+                <Box display="flex" justifyContent="end" mt="1rem" gap="1rem">
+                  <Button
+                    color="secondary"
+                    variant="contained"
+                    type="submit"
+                    sx={{ fontSize: "0.8rem" }}
+                  >
+                    Create New Event
+                  </Button>
+                  <Button
+                    color="error"
+                    variant="contained"
+                    onClick={() => setAddModalOpen(false)}
+                    sx={{ fontSize: "0.8rem" }}
+                  >
+                    Cancel
+                  </Button>
+                </Box>
+              </form>
+            )}
+          </Formik>
+        </CustomModal>
+
+        {/* CustomModal for deleting events */}
+        <CustomModal
+          title="Delete Event"
+          open={deleteModalOpen}
+          onClose={() => setDeleteModalOpen(false)}
+        >
+          <Typography my={3} component="p" gutterBottom>
+            Are you sure you want to delete the event '{eventToDelete?.title}'?
+          </Typography>
+          <Box display="flex" justifyContent="flex-end" mt={2}>
+            <Button
+              onClick={() => setDeleteModalOpen(false)}
+              color="primary"
+              sx={{ mr: 1, fontSize: "0.8rem" }}
             >
-              <Typography variant="h6">{event.title}</Typography>
-              <Typography variant="body2">
-                {safeFormatDate(event.start)}
-              </Typography>
-            </Box>
-          );
-        })}
-      </Box>
+              Cancel
+            </Button>
+            <Button
+              onClick={handleDeleteEvent}
+              color="error"
+              variant="contained"
+              sx={{ fontSize: "0.8rem" }}
+            >
+              Delete
+            </Button>
+          </Box>
+        </CustomModal>
 
-      {/* Main calendar component */}
-      <Box flex="1 1 100%">
-        <FullCalendar
-          height="75vh"
-          plugins={[
-            dayGridPlugin,
-            interactionPlugin,
-            timeGridPlugin,
-            listPlugin,
-          ]}
-          initialView="dayGridMonth"
-          headerToolbar={{
-            start: "prev,next today",
-            center: "title",
-            end: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
-          }}
-          selectable={true}
-          editable={true}
-          selectMirror={true}
-          dayMaxEvents={true}
-          eventsSet={(events) => setCurrentEvents(events)}
-          select={handleDateClick}
-          eventClick={(clickInfo) => {
-            setEventToDelete(clickInfo.event);
-            setDeleteModalOpen(true);
-          }}
-        />
+        {/* Sidebar to display list of events */}
+        <Box
+          flex="1 1 20%"
+          bgcolor="background.paper"
+          mr={2}
+          borderRadius={2}
+          p={2}
+        >
+          <Typography variant="h4" mb={2} textAlign="center">
+            Events
+          </Typography>
+          {currentEvents.map((event: EventType) => {
+            return (
+              <Box
+                key={`${event.id}-${event.start}`}
+                p={2}
+                mb={2}
+                bgcolor="secondary.main"
+              >
+                <Typography variant="h6">{event.title}</Typography>
+                <Typography variant="body2">
+                  {safeFormatDate(event.start)}
+                </Typography>
+              </Box>
+            );
+          })}
+        </Box>
+
+        {/* Main calendar component */}
+        <Box flex="1 1 100%">
+          <FullCalendar
+            height="75vh"
+            plugins={[
+              // Specifies the plugins to be used with FullCalendar
+              dayGridPlugin, // Enables the month view with day grid
+              interactionPlugin, // Allows for user interactions like selecting and dragging events
+              timeGridPlugin, // Enables the week and day views with time slots
+              listPlugin, // Enables the list view for displaying events
+            ]}
+            initialView="dayGridMonth" // Sets the initial view of the calendar to month view
+            headerToolbar={{
+              // Configures the toolbar at the top of the calendar
+              start: "prev,next today", // Buttons for navigating to previous, next, and today's date
+              center: "title", // Displays the title of the current view in the center
+              end: "dayGridMonth,timeGridWeek,timeGridDay,listWeek", // Buttons for switching between different views
+            }}
+            selectable={true} // Enables selection of date/time slots
+            editable={true} // Allows events to be edited (moved/resized)
+            selectMirror={true} // Displays a mirror of the selected date/time slot while dragging
+            dayMaxEvents={true} // Limits the number of events displayed per day in the day view
+            eventsSet={(events) => setCurrentEvents(events)} // Callback to update the current events state when events are set
+            select={handleDateClick} // Callback function to handle date selection
+            eventClick={(clickInfo) => {
+              // Callback function to handle event clicks
+              setEventToDelete(clickInfo.event); // Sets the event to be deleted
+              setDeleteModalOpen(true); // Opens the delete confirmation modal
+            }}
+          />
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 }

@@ -98,3 +98,19 @@ export interface EventType {
   end: string;
   allDay: boolean;
 }
+
+interface FoodData {
+  [key: string]: string | number;
+}
+export interface BarChartType {
+  keys: string[];
+  data: FoodData[];
+  indexBy: string;
+  axisLeftLegend: string;
+  axisBottomLegend: string;
+}
+
+export interface PageHeaderType {
+  title: string;
+  subTitle: string;
+}
