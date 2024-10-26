@@ -114,3 +114,34 @@ export interface PageHeaderType {
   title: string;
   subTitle: string;
 }
+
+interface LineChartData {
+  x: string;
+  y: number;
+}
+
+export interface LineChartType {
+  id: string;
+  color: string;
+  data: LineChartData[];
+}
+
+export interface PieChartType {
+  id: string;
+  color: string;
+  value: number;
+  label: string;
+}
+
+export interface GeoChartType {
+  id: string;
+  value: number;
+}
+
+export interface PerformanceBoxType {
+  title: string;
+  subTitle: string;
+  progress: string;
+  increase: string;
+  icon: React.ReactNode;
+}

@@ -4,13 +4,11 @@ import { ResponsiveBar } from "@nivo/bar";
 import { BarChartType } from "../../utils/interfaces";
 import { Box } from "@mui/material";
 
-const BarChart: React.FC<BarChartType> = ({
-  keys,
-  data,
-  indexBy,
-  axisLeftLegend,
-  axisBottomLegend,
+const BarChart: React.FC<{ isDashboard: Boolean; barData: BarChartType }> = ({
+  isDashboard = false,
+  barData,
 }) => {
+  const { keys, data, indexBy, axisLeftLegend, axisBottomLegend } = barData;
   return (
     <>
       <ResponsiveBar
@@ -19,7 +17,7 @@ const BarChart: React.FC<BarChartType> = ({
         indexBy={indexBy}
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         padding={0.3}
-        maxValue={800}
+        maxValue={700}
         valueScale={{ type: "linear" }}
         indexScale={{ type: "band", round: true }}
         valueFormat=" >-"
@@ -72,20 +70,6 @@ const BarChart: React.FC<BarChartType> = ({
             spacing: 10,
           },
         ]}
-        fill={[
-          {
-            match: {
-              id: "fries",
-            },
-            id: "dots",
-          },
-          {
-            match: {
-              id: "sandwich",
-            },
-            id: "lines",
-          },
-        ]}
         borderColor={{ theme: "background" }}
         axisTop={null}
         axisRight={null}
@@ -93,20 +77,23 @@ const BarChart: React.FC<BarChartType> = ({
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: axisBottomLegend,
+          legend: isDashboard ? undefined : axisBottomLegend,
           legendPosition: "middle",
           legendOffset: 32,
           truncateTickAt: 0,
         }}
         axisLeft={{
-          tickSize: 5,
+          tickSize: 3,
           tickPadding: 5,
           tickRotation: 0,
-          legend: axisLeftLegend,
+          legend: isDashboard ? undefined : axisLeftLegend,
           legendPosition: "middle",
           legendOffset: -40,
           truncateTickAt: 0,
         }}
+        enableLabel={isDashboard?false:true}
+        labelSkipWidth={12}
+       labelSkipHeight={12}
         labelTextColor={{
           from: "color",
           modifiers: [["darker", 1.6]],
@@ -144,7 +131,8 @@ const BarChart: React.FC<BarChartType> = ({
           <Box
             display="flex"
             alignItems="center"
-            bgcolor="secondary.main"
+            bgcolor="white"
+            color='black'
             p={1}
           >
             <Box

@@ -14,7 +14,6 @@ import PageHeader from "../../components/PageHeader/PageHeader.tsx";
 export default function FAQ() {
   return (
     <Box minWidth="100%">
-
       <PageHeader title="FAQ" subTitle="Frequently Asked Questions Page" />
 
       {faqData.map((faq, index) => (
