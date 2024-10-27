@@ -1,10 +1,9 @@
 import React from "react";
-
 import { ResponsiveBar } from "@nivo/bar";
 import { BarChartType } from "../../utils/interfaces";
 import { Box, useTheme } from "@mui/material";
 
-const BarChart: React.FC<{ isDashboard: Boolean; barData: BarChartType }> = ({
+const BarChart: React.FC<{ isDashboard: boolean; barData: BarChartType }> = ({
   isDashboard = false,
   barData,
 }) => {
