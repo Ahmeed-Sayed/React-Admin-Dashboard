@@ -13,7 +13,7 @@ const ProgPieChart = () => {
         subTitle="Simple Pie Chart"
       />
       <Box height="75vh" >
-        <PieChart pieData={pieData} isDashboard={false} />
+        <PieChart pieData={pieData} />
       </Box>
     </Box>
   );

@@ -11,7 +11,7 @@ interface Props {
 }
 const GeoChart: React.FC<Props> = ({ isDashboard, geoData }: Props) => {
   const theme = useTheme();
-  const colors =tokens(theme.palette.mode)
+  const colors = tokens(theme.palette.mode);
   return (
     <ResponsiveChoropleth
       data={geoData}
@@ -36,7 +36,7 @@ const GeoChart: React.FC<Props> = ({ isDashboard, geoData }: Props) => {
           },
           legend: {
             text: {
-              fill: theme.palette.mode ==="dark"?"white": "black",
+              fill: theme.palette.mode === "dark" ? "white" : "black",
             },
           },
           ticks: {
@@ -45,13 +45,13 @@ const GeoChart: React.FC<Props> = ({ isDashboard, geoData }: Props) => {
               strokeWidth: 1,
             },
             text: {
-              fill: theme.palette.mode ==="dark"?"white": "black",
+              fill: theme.palette.mode === "dark" ? "white" : "black",
             },
           },
         },
         legends: {
           text: {
-            fill: theme.palette.mode ==="dark"?"white": "black",
+            fill: theme.palette.mode === "dark" ? "white" : "black",
           },
         },
       }}
@@ -69,10 +69,11 @@ const GeoChart: React.FC<Props> = ({ isDashboard, geoData }: Props) => {
                 itemWidth: 94,
                 itemHeight: 18,
                 itemDirection: "left-to-right",
-                itemTextColor: theme.palette.mode ==="dark"?"white": "black",
+                itemTextColor:
+                  theme.palette.mode === "dark" ? "white" : "black",
                 itemOpacity: 0.85,
                 symbolSize: 18,
-                symbolBorderColor:"black",
+                symbolBorderColor: "black",
                 effects: [
                   {
                     on: "hover",
@@ -103,6 +104,7 @@ const GeoChart: React.FC<Props> = ({ isDashboard, geoData }: Props) => {
                 bgcolor={feature.color}
                 mr="5px"
               />
+              {/* // @ts-ignore */}
               {feature.id}:<strong>{feature.value}</strong>
             </Box>
           );

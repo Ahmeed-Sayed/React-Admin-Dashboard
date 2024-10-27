@@ -3,7 +3,6 @@ import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import { BarChartType } from "../../utils/interfaces";
 import { Box, useTheme } from "@mui/material";
-import { tokens } from "../../utils/theme";
 
 const BarChart: React.FC<{ isDashboard: Boolean; barData: BarChartType }> = ({
   isDashboard = false,

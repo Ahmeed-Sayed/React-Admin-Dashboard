@@ -1,6 +1,4 @@
-import { createTheme, ThemeOptions } from "@mui/material";
-
-export const tokens = (mode) => ({
+export const tokens = (mode: string) => ({
   ...(mode === "light"
     ? {
         secondary: {
@@ -118,7 +116,7 @@ export const tokens = (mode) => ({
       }),
 });
 
-export const themeSettings = (mode) => {
+export const themeSettings = (mode: string) => {
   const colors = tokens(mode);
   return {
     palette: {

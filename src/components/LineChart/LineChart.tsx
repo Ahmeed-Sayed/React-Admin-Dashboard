@@ -9,7 +9,6 @@ const LineChart: React.FC<{
   data: LineChartType[];
 }> = ({ isDashboard = false, data }) => {
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
   return (
     <ResponsiveLine
       data={data}

@@ -20,7 +20,7 @@ const PieChart: React.FC<{
       colors={{ scheme: "set3" }}
       borderColor={{
         from: "color",
-        modifiers: [["darker", "0.2"]],
+        modifiers: [["darker", 0.2]],
       }}
       theme={{
         axis: {

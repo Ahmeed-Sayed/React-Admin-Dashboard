@@ -1,4 +1,4 @@
-import React, { Children, ReactNode } from 'react';
+import React, {  ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 import { Box, Modal as MuiModal, ModalProps as MuiModalProps, Typography } from '@mui/material';
 

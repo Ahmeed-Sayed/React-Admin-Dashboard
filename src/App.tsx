@@ -20,7 +20,6 @@ import FoodBarChart from "./pages/FoodBarChart/FoodBarChart";
 import TransportLineChart from "./pages/TransportLineChart/TransportLineChart";
 import ProgPieChart from "./pages/ProgPieChart/ProgPieChart";
 import { themeSettings } from "./utils/theme";
-// import { darkTheme, lightTheme } from "./utils/theme";
 
 function App() {
   const [mode, setMode] = useState(() => {
@@ -28,7 +27,7 @@ function App() {
     return savedMode || "light";
   });
 
-  const theme = createTheme(themeSettings(mode));
+  const theme = createTheme(themeSettings(mode as PaletteMode));
   const router = createBrowserRouter([
     {
       path: "/",

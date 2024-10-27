@@ -36,7 +36,7 @@ const PerformanceBox: React.FC<PerformanceBoxType> = ({
         justifyContent="space-around"
         alignItems="center"
       >
-        <ProgressCircle progress={progress} />
+        <ProgressCircle progress={progress} size="40" />
         <Typography color="secondary.main" variant="subtitle2">
           {increase}
         </Typography>
