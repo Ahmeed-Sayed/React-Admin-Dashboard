@@ -1,10 +1,11 @@
 import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { mockDataTeam } from "../../data/mockDataTeam";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import PageHeader from "../../components/PageHeader/PageHeader";
+import { tokens } from "../../utils/theme";
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
   { field: "name", headerName: "Name", flex: 1 },
@@ -39,10 +40,12 @@ const columns: GridColDef[] = [
 ];
 
 export default function ManageTeam() {
+  const  theme=useTheme()
+  const colors = tokens(theme.palette.mode)
   return (
     <>
     <PageHeader title="Team" subTitle="Managing the Team Members" />
-    <Box sx={{ height: "75vh", width: "100%" }}>
+    <Box sx={{ height: "75vh", width: "100%" }} bgcolor={colors.primary[400]}>
       <DataGrid
         rows={mockDataTeam}
         columns={columns}

@@ -1,7 +1,8 @@
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import mockDataContacts from "../../data/mockDataContacts";
 import PageHeader from "../../components/PageHeader/PageHeader";
+import { tokens } from "../../utils/theme";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID" },
@@ -21,6 +22,8 @@ const columns: GridColDef[] = [
 ];
 
 export default function Contacts() {
+  const  theme=useTheme()
+  const colors = tokens(theme.palette.mode)
   return (
     <>
     <PageHeader
@@ -32,6 +35,7 @@ export default function Contacts() {
         rows={mockDataContacts}
         columns={columns}
         sx={{
+          backgroundColor: colors.primary[400],
           "& .MuiDataGrid-root, .MuiDataGrid-virtualScroller": {
             border: "none",
           },

@@ -21,10 +21,14 @@ import BarChart from "../../components/BarChart/BarChart.tsx";
 import BarData from "../../data/mockDataBar.tsx";
 import GeoChart from "../../components/GeoChart/GeoChart.tsx";
 import GeoData from "../../data/mockDataGeo.tsx";
+import { useTheme } from "@emotion/react";
+import { tokens } from "../../utils/theme.tsx";
 
 export default function Dashboard() {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   return (
-    <Box display="flex" flexDirection="column" gap="1rem" my="2rem" pr={2} >
+    <Box display="flex" flexDirection="column" gap="1rem" my="2rem" pr={2}>
       <Box display="flex" justifyContent="space-between" alignItems={"center"}>
         <Box display="flex" flexDirection="column">
           <Typography variant="h2" component="p">
@@ -39,8 +43,8 @@ export default function Dashboard() {
           sx={{
             px: "1rem",
             py: ".5rem",
-            backgroundColor: "info.dark",
-            color: "text.primary",
+            backgroundColor: "info.main",
+            color: "white",
           }}
         >
           <Typography variant="button" component="span">
@@ -58,7 +62,7 @@ export default function Dashboard() {
             increase="+14%"
             icon={
               <EmailIcon
-                sx={{ color: colors.green["A400"], fontSize: "26px" }}
+                sx={{ color: colors.secondary[500], fontSize: "26px" }}
               />
             }
           />
@@ -71,7 +75,7 @@ export default function Dashboard() {
             increase="+21%"
             icon={
               <PointOfSaleIcon
-                sx={{ color: colors.green["A400"], fontSize: "26px" }}
+                sx={{ color: colors.secondary[500], fontSize: "26px" }}
               />
             }
           />
@@ -84,7 +88,7 @@ export default function Dashboard() {
             increase="+5%"
             icon={
               <PersonAddIcon
-                sx={{ color: colors.green["A400"], fontSize: "26px" }}
+                sx={{ color: colors.secondary[500], fontSize: "26px" }}
               />
             }
           />
@@ -98,14 +102,14 @@ export default function Dashboard() {
             increase="+43%"
             icon={
               <TrafficIcon
-                sx={{ color: colors.green["A400"], fontSize: "26px" }}
+                sx={{ color: colors.secondary[500], fontSize: "26px" }}
               />
             }
           />
         </Grid2>
         <Grid2
           gridTemplateRows={2}
-          bgcolor="background.paper"
+          bgcolor={colors.primary[400]}
           size={8}
           height={300}
           display="flex"
@@ -123,7 +127,7 @@ export default function Dashboard() {
             </Box>
             <IconButton>
               <FileDownloadIcon
-                sx={{ fontSize: "1.7rem", color: colors.green["A400"] }}
+                sx={{ fontSize: "1.7rem", color: colors.secondary[500] }}
               />
             </IconButton>
           </Box>
@@ -148,7 +152,7 @@ export default function Dashboard() {
                   p="5px"
                   key={index}
                   alignItems="center"
-                  bgcolor="background.paper"
+                  bgcolor={colors.primary[400]}
                 >
                   <Box width="30%">
                     <Typography variant="h6">{transaction.txId}</Typography>
@@ -160,7 +164,7 @@ export default function Dashboard() {
                     <Typography variant="h6">{transaction.date}</Typography>
                   </Box>
                   <Box p={0.8} bgcolor="secondary.main" borderRadius="5px">
-                    <Typography variant="h6" fontWeight="bold">
+                    <Typography variant="h6" fontWeight="bold" color="white">
                       ${transaction.cost}
                     </Typography>
                   </Box>
@@ -169,7 +173,7 @@ export default function Dashboard() {
             })}
         </Grid2>
         {/* Row 3 */}
-        <Grid2 bgcolor="background.paper" size={4} height={300} p={2}>
+        <Grid2 bgcolor={colors.primary[400]} size={4} height={300} p={2}>
           <DashboardChart title="Campaign">
             <ProgressCircle size="140" progress=".75" />
             <Typography
@@ -185,12 +189,12 @@ export default function Dashboard() {
             </Typography>
           </DashboardChart>
         </Grid2>
-        <Grid2 bgcolor="background.paper" size={4} height={300} p={1}>
+        <Grid2 bgcolor={colors.primary[400]} size={4} height={300} p={2}>
           <DashboardChart title="Sale Quantity">
             <BarChart barData={BarData} isDashboard={true} />
           </DashboardChart>
         </Grid2>
-        <Grid2 bgcolor="background.paper" size={4} height={300} p={2}>
+        <Grid2 bgcolor={colors.primary[400]} size={4} height={300} p={2}>
           <DashboardChart title="Geography Based Traffic">
             <GeoChart geoData={GeoData} isDashboard={true} />
           </DashboardChart>

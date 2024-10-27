@@ -42,13 +42,14 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography, useTheme } from "@mui/material";
 import { EventType } from "../../utils/interfaces";
 import CustomModal from "../../components/CustomModal/CustomModal.tsx";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import PageHeader from "../../components/PageHeader/PageHeader.tsx";
-
+import { tokens } from "../../utils/theme.tsx";
+import "./Calendar.scss";
 /**
  * Initial values for the event creation form
  */
@@ -91,12 +92,13 @@ function safeFormatDate(date: any): string {
  * Uses FullCalendar for rendering and MUI for layout and styling.
  */
 export default function Calendar() {
+  const theme = useTheme();
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState<any>(null);
   const [currentEvents, setCurrentEvents] = useState<EventType[]>([]);
   const [eventToDelete, setEventToDelete] = useState<any>(null);
-
+  const colors = tokens(theme.palette.mode);
   /**
    * Handles form submission for creating a new event
    * @param values - Form values containing event details
@@ -142,7 +144,8 @@ export default function Calendar() {
   };
 
   return (
-    <>
+    <Box bgcolor={colors.primary[400]} p={2} borderRadius={1}>
+
       <PageHeader title="Calendar" subTitle="Full Calendar Interactive Page" />
       <Box display="flex">
         {/* CustomModal for adding events */}
@@ -247,12 +250,14 @@ export default function Calendar() {
         {/* Sidebar to display list of events */}
         <Box
           flex="1 1 20%"
-          bgcolor="background.paper"
+          bgcolor={colors.blueAccent[600]}
           mr={2}
           borderRadius={2}
           p={2}
+          height="80vh"
+          overflow="auto"
         >
-          <Typography variant="h4" mb={2} textAlign="center">
+          <Typography variant="h4" mb={2} textAlign="center" color="white">
             Events
           </Typography>
           {currentEvents.map((event: EventType) => {
@@ -261,7 +266,8 @@ export default function Calendar() {
                 key={`${event.id}-${event.start}`}
                 p={2}
                 mb={2}
-                bgcolor="secondary.main"
+                bgcolor={colors.primary[400]}
+                borderRadius={1}
               >
                 <Typography variant="h6">{event.title}</Typography>
                 <Typography variant="body2">
@@ -273,7 +279,7 @@ export default function Calendar() {
         </Box>
 
         {/* Main calendar component */}
-        <Box flex="1 1 100%">
+        <Box flex="1 1 100%" bgcolor={colors.blueAccent[700]} p={2} color="white">
           <FullCalendar
             height="75vh"
             plugins={[
@@ -304,6 +310,6 @@ export default function Calendar() {
           />
         </Box>
       </Box>
-    </>
+    </Box>
   );
 }

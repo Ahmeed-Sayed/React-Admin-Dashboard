@@ -1,6 +1,7 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography, useTheme } from "@mui/material";
 import ProgressCircle from "../ProgressCircle/ProgressCircle";
 import { PerformanceBoxType } from "../../utils/interfaces";
+import { tokens } from "../../utils/theme";
 const PerformanceBox: React.FC<PerformanceBoxType> = ({
   icon,
   increase,
@@ -8,6 +9,8 @@ const PerformanceBox: React.FC<PerformanceBoxType> = ({
   subTitle,
   title,
 }) => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   return (
     <Box
       width="20%"
@@ -15,7 +18,7 @@ const PerformanceBox: React.FC<PerformanceBoxType> = ({
       justifyContent="space-between"
       px="1rem"
       py="1.5rem"
-      bgcolor="background.paper"
+      bgcolor={colors.primary[400]}
       minWidth="100%"
       height="100%"
       alignItems="center"

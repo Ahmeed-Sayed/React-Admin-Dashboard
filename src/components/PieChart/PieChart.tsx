@@ -1,11 +1,14 @@
 import React from "react";
 import { ResponsivePie } from "@nivo/pie";
 import { PieChartType } from "../../utils/interfaces";
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
+import { tokens } from "../../utils/theme";
 
 const PieChart: React.FC<{
   pieData: PieChartType[];
 }> = ({ pieData }) => {
+  const theme = useTheme();
+  const colors =tokens(theme.palette.mode)
   return (
     <ResponsivePie
       data={pieData}
@@ -28,7 +31,7 @@ const PieChart: React.FC<{
           },
           legend: {
             text: {
-              fill: "white",
+              fill: theme.palette.mode ==="dark"?"white": "black",
             },
           },
           ticks: {
@@ -37,20 +40,20 @@ const PieChart: React.FC<{
               strokeWidth: 1,
             },
             text: {
-              fill: "white",
+              fill: theme.palette.mode ==="dark"?"white": "black",
             },
           },
         },
         legends: {
           text: {
-            fill: "white",
+            fill: theme.palette.mode ==="dark"?"white": "black",
           },
         },
       }}
       arcLinkLabel={(e) => e.id + " (" + e.value + ")"}
       arcLinkLabelsSkipAngle={10}
-      arcLinkLabelsTextColor="white"
-      arcLinkLabelsThickness={2}
+      arcLinkLabelsTextColor={theme.palette.mode ==="dark"?"white": "black"}
+      arcLinkLabelsThickness={3}
       arcLinkLabelsColor={{ from: "color" }}
       arcLabelsSkipAngle={10}
       arcLabelsTextColor={{
@@ -94,7 +97,7 @@ const PieChart: React.FC<{
             {
               on: "hover",
               style: {
-                itemTextColor: "yellow ",
+                itemTextColor: colors.secondary[500],
               },
             },
           ],

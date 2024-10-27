@@ -2,12 +2,15 @@ import React from "react";
 
 import { ResponsiveBar } from "@nivo/bar";
 import { BarChartType } from "../../utils/interfaces";
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
+import { tokens } from "../../utils/theme";
 
 const BarChart: React.FC<{ isDashboard: Boolean; barData: BarChartType }> = ({
   isDashboard = false,
   barData,
 }) => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const { keys, data, indexBy, axisLeftLegend, axisBottomLegend } = barData;
   return (
     <>
@@ -26,50 +29,30 @@ const BarChart: React.FC<{ isDashboard: Boolean; barData: BarChartType }> = ({
           axis: {
             domain: {
               line: {
-                stroke: "white",
+                stroke: theme.palette.mode === "dark" ? "white" : "black",
               },
             },
             legend: {
               text: {
-                fill: "white",
+                fill: theme.palette.mode === "dark" ? "white" : "black",
               },
             },
             ticks: {
               line: {
-                stroke: "white",
+                stroke: theme.palette.mode === "dark" ? "white" : "black",
                 strokeWidth: 1,
               },
               text: {
-                fill: "white",
+                fill: theme.palette.mode === "dark" ? "white" : "black",
               },
             },
           },
           legends: {
             text: {
-              fill: "white",
+              fill: theme.palette.mode === "dark" ? "white" : "black",
             },
           },
         }}
-        defs={[
-          {
-            id: "dots",
-            type: "patternDots",
-            background: "inherit",
-            color: "#38bcb2",
-            size: 4,
-            padding: 1,
-            stagger: true,
-          },
-          {
-            id: "lines",
-            type: "patternLines",
-            background: "inherit",
-            color: "#eed312",
-            rotation: -45,
-            lineWidth: 6,
-            spacing: 10,
-          },
-        ]}
         borderColor={{ theme: "background" }}
         axisTop={null}
         axisRight={null}
@@ -91,9 +74,9 @@ const BarChart: React.FC<{ isDashboard: Boolean; barData: BarChartType }> = ({
           legendOffset: -40,
           truncateTickAt: 0,
         }}
-        enableLabel={isDashboard?false:true}
+        enableLabel={isDashboard ? false : true}
         labelSkipWidth={12}
-       labelSkipHeight={12}
+        labelSkipHeight={12}
         labelTextColor={{
           from: "color",
           modifiers: [["darker", 1.6]],
@@ -132,7 +115,7 @@ const BarChart: React.FC<{ isDashboard: Boolean; barData: BarChartType }> = ({
             display="flex"
             alignItems="center"
             bgcolor="white"
-            color='black'
+            color="black"
             p={1}
           >
             <Box

@@ -19,45 +19,16 @@ import Layout from "./Layout";
 import FoodBarChart from "./pages/FoodBarChart/FoodBarChart";
 import TransportLineChart from "./pages/TransportLineChart/TransportLineChart";
 import ProgPieChart from "./pages/ProgPieChart/ProgPieChart";
+import { themeSettings } from "./utils/theme";
 // import { darkTheme, lightTheme } from "./utils/theme";
 
 function App() {
-  const [mode, setMode] = useState<PaletteMode>(() => {
+  const [mode, setMode] = useState(() => {
     const savedMode = localStorage.getItem("siteMode") as PaletteMode;
     return savedMode || "light";
   });
 
-  const theme = createTheme({
-   
-    typography: {
-      fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
-      fontSize: 12,
-      h1: {
-        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
-        fontSize: 40,
-      },
-      h2: {
-        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
-        fontSize: 32,
-      },
-      h3: {
-        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
-        fontSize: 24,
-      },
-      h4: {
-        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
-        fontSize: 20,
-      },
-      h5: {
-        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
-        fontSize: 16,
-      },
-      h6: {
-        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
-        fontSize: 14,
-      },
-    },
-  });
+  const theme = createTheme(themeSettings(mode));
   const router = createBrowserRouter([
     {
       path: "/",
@@ -72,7 +43,7 @@ function App() {
         { path: "/faq", element: <FAQ /> },
         { path: "/bar", element: <FoodBarChart /> },
         { path: "/pie", element: <ProgPieChart /> },
-        { path: "/line", element: <TransportLineChart /> },
+        { path: "/line", element: <TransportLineChart isDashboard={false} /> },
         { path: "/geography", element: <GeographyChart /> },
       ],
     },

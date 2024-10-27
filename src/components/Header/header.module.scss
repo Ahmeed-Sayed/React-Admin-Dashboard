@@ -8,24 +8,10 @@
     align-items: center;
     padding-right: 1rem;
 
-    .header_container__search {
-        background-color: $dark-secondary-color;
-        color: white !important;
-
-        input {
-            color: white
-        }
-    }
 
     .header_container__utility {
         display: flex;
         gap: .5rem;
         border-radius: 50%;
-
-        button {
-            &:hover {
-                background-color: $dark-secondary-color;
-            }
-        }
     }
 }

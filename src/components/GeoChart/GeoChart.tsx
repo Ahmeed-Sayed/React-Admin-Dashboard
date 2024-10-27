@@ -3,12 +3,15 @@ import React from "react";
 import { ResponsiveChoropleth } from "@nivo/geo";
 import features from "../../data/geoChartFeatures";
 import { GeoChartType } from "../../utils/interfaces";
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
+import { tokens } from "../../utils/theme";
 interface Props {
   isDashboard: boolean;
   geoData: GeoChartType[];
 }
 const GeoChart: React.FC<Props> = ({ isDashboard, geoData }: Props) => {
+  const theme = useTheme();
+  const colors =tokens(theme.palette.mode)
   return (
     <ResponsiveChoropleth
       data={geoData}
@@ -18,6 +21,7 @@ const GeoChart: React.FC<Props> = ({ isDashboard, geoData }: Props) => {
       unknownColor="#666666"
       label="properties.name"
       valueFormat=".2s"
+      colors="nivo"
       projectionTranslation={isDashboard ? [0.49, 0.6] : [0.5, 0.5]}
       projectionRotation={[0, 0, 0]}
       borderWidth={0.5}
@@ -32,7 +36,7 @@ const GeoChart: React.FC<Props> = ({ isDashboard, geoData }: Props) => {
           },
           legend: {
             text: {
-              fill: "white",
+              fill: theme.palette.mode ==="dark"?"white": "black",
             },
           },
           ticks: {
@@ -41,13 +45,13 @@ const GeoChart: React.FC<Props> = ({ isDashboard, geoData }: Props) => {
               strokeWidth: 1,
             },
             text: {
-              fill: "white",
+              fill: theme.palette.mode ==="dark"?"white": "black",
             },
           },
         },
         legends: {
           text: {
-            fill: "white",
+            fill: theme.palette.mode ==="dark"?"white": "black",
           },
         },
       }}
@@ -65,14 +69,15 @@ const GeoChart: React.FC<Props> = ({ isDashboard, geoData }: Props) => {
                 itemWidth: 94,
                 itemHeight: 18,
                 itemDirection: "left-to-right",
-                itemTextColor: "white",
+                itemTextColor: theme.palette.mode ==="dark"?"white": "black",
                 itemOpacity: 0.85,
                 symbolSize: 18,
+                symbolBorderColor:"black",
                 effects: [
                   {
                     on: "hover",
                     style: {
-                      itemTextColor: "yellow",
+                      itemTextColor: colors.secondary[500],
                       itemOpacity: 1,
                     },
                   },

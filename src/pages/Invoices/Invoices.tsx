@@ -1,7 +1,8 @@
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import mockDataInvoices from "../../data/mockDataInvoices";
 import PageHeader from "../../components/PageHeader/PageHeader";
+import { tokens } from "../../utils/theme";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID" },
@@ -18,15 +19,18 @@ const columns: GridColDef[] = [
 ];
 
 export default function Invoices() {
+  const  theme=useTheme()
+  const colors = tokens(theme.palette.mode)
   return (
     <>
       <PageHeader title="INVOICES" subTitle="List of Invoice Balances" />
-      <Box sx={{ height: "75vh", width: "100%" }}>
+      <Box sx={{ height: "75vh", width: "100%" }} >
         <DataGrid
           rows={mockDataInvoices}
           columns={columns}
           checkboxSelection
           sx={{
+            backgroundColor: colors.primary[400],
             "& .MuiDataGrid-root, .MuiDataGrid-virtualScroller": {
               border: "none",
             },

@@ -1,12 +1,15 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { LineChartType } from "../../utils/interfaces.tsx";
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
+import { tokens } from "../../utils/theme.tsx";
 
 const LineChart: React.FC<{
   isDashboard: Boolean;
   data: LineChartType[];
 }> = ({ isDashboard = false, data }) => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   return (
     <ResponsiveLine
       data={data}
@@ -16,27 +19,27 @@ const LineChart: React.FC<{
         axis: {
           domain: {
             line: {
-              stroke: "white",
+              stroke: theme.palette.mode === "dark" ? "white" : "black",
             },
           },
           legend: {
             text: {
-              fill: "white",
+              fill: theme.palette.mode === "dark" ? "white" : "black",
             },
           },
           ticks: {
             line: {
-              stroke: "white",
+              stroke: theme.palette.mode === "dark" ? "white" : "black",
               strokeWidth: 1,
             },
             text: {
-              fill: "white",
+              fill: theme.palette.mode === "dark" ? "white" : "black",
             },
           },
         },
         legends: {
           text: {
-            fill: "white",
+            fill: theme.palette.mode === "dark" ? "white" : "black",
           },
         },
       }}
