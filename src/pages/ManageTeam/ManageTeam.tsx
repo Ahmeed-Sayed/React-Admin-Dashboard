@@ -25,13 +25,14 @@ const columns: GridColDef[] = [
           m="0 auto"
           display="flex"
           bgcolor="secondary.main"
+          color="white"
           gap={2}
           justifyContent="center"
           borderRadius="5px"
         >
-          {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
-          {access === "manager" && <SecurityOutlinedIcon />}
-          {access === "user" && <LockOpenOutlinedIcon />}
+          {access === "admin" && <AdminPanelSettingsOutlinedIcon style={{color:"white"}}/>}
+          {access === "manager" && <SecurityOutlinedIcon style={{color:"white"}}/>}
+          {access === "user" && <LockOpenOutlinedIcon style={{color:"white"}}/>}
           <Typography>{access}</Typography>
         </Box>
       );
@@ -40,31 +41,37 @@ const columns: GridColDef[] = [
 ];
 
 export default function ManageTeam() {
-  const  theme=useTheme()
-  const colors = tokens(theme.palette.mode)
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   return (
-    <>
-    <PageHeader title="Team" subTitle="Managing the Team Members" />
-    <Box sx={{ height: "75vh", width: "100%" }} bgcolor={colors.primary[400]}>
-      <DataGrid
-        rows={mockDataTeam}
-        columns={columns}
-        checkboxSelection
-        sx={{
-          "& .MuiDataGrid-root , .MuiDataGrid-virtualScroller": {
-            border: "none ",
-          },
-          "& .MuiDataGrid-columnHeader , .MuiDataGrid-footerContainer": {
-            backgroundColor: "info.dark",
-          },
-          "& .MuiDataGrid-cell": {
-            borderTop: "none",
-            display: "flex",
-            alignItems: "center",
-          },
-        }}
-      />
+    <Box bgcolor={colors.primary[400]} p={2} borderRadius={1}>
+      <PageHeader title="Team" subTitle="Managing the Team Members" />
+      <Box sx={{ height: "75vh", width: "100%" }} bgcolor={colors.primary[400]}>
+        <DataGrid
+          rows={mockDataTeam}
+          columns={columns}
+          checkboxSelection
+          style={{ border: "none" }}
+          sx={{
+            backgroundColor: colors.primary[400],
+            "& .MuiDataGrid-columnHeader, .MuiDataGrid-footerContainer, .MuiTablePagination-root": {
+              backgroundColor: "info.main",
+              color: "white",
+            },
+            "& .MuiSvgIcon-root": {
+              color: theme.palette.mode === "dark" ? "white" : "black",
+            },
+            "& .MuiDataGrid-cell": {
+              borderTop: "none",
+              display: "flex",
+              alignItems: "center",
+            },
+            "& .cost-column-cell": {
+              color: "secondary.main",
+            },
+          }}
+        />
+      </Box>
     </Box>
-            </>
   );
 }

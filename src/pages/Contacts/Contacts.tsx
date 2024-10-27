@@ -22,37 +22,39 @@ const columns: GridColDef[] = [
 ];
 
 export default function Contacts() {
-  const  theme=useTheme()
-  const colors = tokens(theme.palette.mode)
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   return (
-    <>
-    <PageHeader
+    <Box bgcolor={colors.primary[400]} p={2} borderRadius={1}>
+      <PageHeader
         title="CONTACTS"
         subTitle="List of Contacts for Future Reference"
       />
-    <Box sx={{ height: "75vh", width: "100%" }}>
-      <DataGrid
-        rows={mockDataContacts}
-        columns={columns}
-        sx={{
-          backgroundColor: colors.primary[400],
-          "& .MuiDataGrid-root, .MuiDataGrid-virtualScroller": {
-            border: "none",
-          },
-          "& .MuiDataGrid-columnHeader, .MuiDataGrid-footerContainer": {
-            backgroundColor: "info.dark",
-          },
-          "& .MuiDataGrid-cell": {
-            borderTop: "none",
-            display: "flex",
-            alignItems: "center",
-          },
-          "& .name-column-class": {
-            color: "secondary.main",
-          },
-        }}
-      />
+      <Box sx={{ height: "75vh", width: "100%" }}>
+        <DataGrid
+          rows={mockDataContacts}
+          columns={columns}
+          style={{ border: "none" }}
+          sx={{
+            backgroundColor: colors.primary[400],
+            "& .MuiDataGrid-columnHeader, .MuiDataGrid-footerContainer, .MuiTablePagination-root": {
+              backgroundColor: "info.main",
+              color: "white",
+            },
+            "& .MuiSvgIcon-root": {
+              color: theme.palette.mode === "dark" ? "white" : "black",
+            },
+            "& .MuiDataGrid-cell": {
+              borderTop: "none",
+              display: "flex",
+              alignItems: "center",
+            },
+            "& .cost-column-cell": {
+              color: "secondary.main",
+            },
+          }}
+        />
+      </Box>
     </Box>
-    </>
   );
 }

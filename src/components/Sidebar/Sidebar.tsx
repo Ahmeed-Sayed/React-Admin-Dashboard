@@ -88,7 +88,6 @@ export default function SidebarComponent() {
                   {({ isActive }) => (
                     <ListItem disablePadding>
                       <ListItemButton
-                        color="sucess"
                         sx={{
                           justifyContent: !isSidebarClosed
                             ? undefined
@@ -96,21 +95,12 @@ export default function SidebarComponent() {
                           "& .MuiTouchRipple-root": {
                             color: "secondary.main", // Set your custom ripple color here
                           },
-                          // "&:active": {
-                          //   backgroundColor: colors.secondary[500], // Change this to your desired click effect color
-                          // },
-                          // "&:focus": {
-                          //   outline: "none", // Remove default focus outline
-                          //   backgroundColor: colors.secondary[500], // Optional: Set focus color
-                          // },
-                          // "&:focus-visible": {
-                          //   outline: "none", // Remove default focus outline
-                          // },
                         }}
                       >
                         <ListItemIcon
                           sx={{
                             justifyContent: "center",
+                            color: isActive ? "secondary.main" : "text.primary", // Change this to your desired click effect color
                           }}
                         >
                           {item.icon}

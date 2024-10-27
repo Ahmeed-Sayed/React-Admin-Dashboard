@@ -19,23 +19,25 @@ const columns: GridColDef[] = [
 ];
 
 export default function Invoices() {
-  const  theme=useTheme()
-  const colors = tokens(theme.palette.mode)
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   return (
-    <>
+    <Box bgcolor={colors.primary[400]} p={2} borderRadius={1}>
       <PageHeader title="INVOICES" subTitle="List of Invoice Balances" />
-      <Box sx={{ height: "75vh", width: "100%" }} >
+      <Box sx={{ height: "75vh", width: "100%" }}>
         <DataGrid
           rows={mockDataInvoices}
           columns={columns}
           checkboxSelection
+          style={{ border: "none" }}
           sx={{
             backgroundColor: colors.primary[400],
-            "& .MuiDataGrid-root, .MuiDataGrid-virtualScroller": {
-              border: "none",
+            "& .MuiDataGrid-columnHeader, .MuiDataGrid-footerContainer, .MuiTablePagination-root": {
+              backgroundColor: "info.main",
+              color: "white",
             },
-            "& .MuiDataGrid-columnHeader, .MuiDataGrid-footerContainer": {
-              backgroundColor: "info.dark",
+            "& .MuiSvgIcon-root": {
+              color: theme.palette.mode === "dark" ? "white" : "black",
             },
             "& .MuiDataGrid-cell": {
               borderTop: "none",
@@ -48,6 +50,6 @@ export default function Invoices() {
           }}
         />
       </Box>
-    </>
+    </Box>
   );
 }

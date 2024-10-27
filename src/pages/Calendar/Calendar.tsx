@@ -41,7 +41,6 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
-import listPlugin from "@fullcalendar/list";
 import { Box, Button, TextField, Typography, useTheme } from "@mui/material";
 import { EventType } from "../../utils/interfaces";
 import CustomModal from "../../components/CustomModal/CustomModal.tsx";
@@ -145,7 +144,6 @@ export default function Calendar() {
 
   return (
     <Box bgcolor={colors.primary[400]} p={2} borderRadius={1}>
-
       <PageHeader title="Calendar" subTitle="Full Calendar Interactive Page" />
       <Box display="flex">
         {/* CustomModal for adding events */}
@@ -198,10 +196,10 @@ export default function Calendar() {
                 </Box>
                 <Box display="flex" justifyContent="end" mt="1rem" gap="1rem">
                   <Button
-                    color="secondary"
+                    color="info"
                     variant="contained"
                     type="submit"
-                    sx={{ fontSize: "0.8rem" }}
+                    sx={{ fontSize: "0.8rem", color: "white" }}
                   >
                     Create New Event
                   </Button>
@@ -231,7 +229,7 @@ export default function Calendar() {
           <Box display="flex" justifyContent="flex-end" mt={2}>
             <Button
               onClick={() => setDeleteModalOpen(false)}
-              color="primary"
+              color="info"
               sx={{ mr: 1, fontSize: "0.8rem" }}
             >
               Cancel
@@ -250,7 +248,7 @@ export default function Calendar() {
         {/* Sidebar to display list of events */}
         <Box
           flex="1 1 20%"
-          bgcolor={colors.blueAccent[600]}
+          bgcolor={colors.primary[600]}
           mr={2}
           borderRadius={2}
           p={2}
@@ -279,7 +277,7 @@ export default function Calendar() {
         </Box>
 
         {/* Main calendar component */}
-        <Box flex="1 1 100%" bgcolor={colors.blueAccent[700]} p={2} color="white">
+        <Box flex="1 1 100%" p={2}>
           <FullCalendar
             height="75vh"
             plugins={[
@@ -287,14 +285,13 @@ export default function Calendar() {
               dayGridPlugin, // Enables the month view with day grid
               interactionPlugin, // Allows for user interactions like selecting and dragging events
               timeGridPlugin, // Enables the week and day views with time slots
-              listPlugin, // Enables the list view for displaying events
             ]}
             initialView="dayGridMonth" // Sets the initial view of the calendar to month view
             headerToolbar={{
               // Configures the toolbar at the top of the calendar
               start: "prev,next today", // Buttons for navigating to previous, next, and today's date
               center: "title", // Displays the title of the current view in the center
-              end: "dayGridMonth,timeGridWeek,timeGridDay,listWeek", // Buttons for switching between different views
+              end: "dayGridMonth,timeGridWeek,timeGridDay", // Buttons for switching between different views
             }}
             selectable={true} // Enables selection of date/time slots
             editable={true} // Allows events to be edited (moved/resized)

@@ -10,7 +10,6 @@ const BarChart: React.FC<{ isDashboard: Boolean; barData: BarChartType }> = ({
   barData,
 }) => {
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
   const { keys, data, indexBy, axisLeftLegend, axisBottomLegend } = barData;
   return (
     <>
