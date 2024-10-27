@@ -72,7 +72,15 @@ export default function SidebarComponent() {
         <List disablePadding>
           {sidebarItems.map((categoryItem, index) => (
             <React.Fragment key={index}>
-              <ListItem disablePadding sx={{ paddingTop: "1rem" }}>
+              <ListItem
+                disablePadding
+                sx={{
+                  paddingTop: "1rem",
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: isSidebarClosed && "center",
+                }}
+              >
                 <Typography variant="subtitle2" pl={"10%"}>
                   {categoryItem.category}
                 </Typography>
