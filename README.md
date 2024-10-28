@@ -14,7 +14,6 @@ The Admin Dashboard is a comprehensive web application that provides administrat
 - To explore data visualization techniques and libraries.
 
 ## Features
-- **User Management**: Create, update, and delete user profiles with validation.
 - **Data Visualization**: Interactive charts and graphs (Bar, Pie, Line, and Geo charts) for data representation.
 - **Calendar Integration**: Full-featured calendar for event management, including adding and deleting events.
 - **Sidebar Navigation**: Easy navigation through different application sections.
