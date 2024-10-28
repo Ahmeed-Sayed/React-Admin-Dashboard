@@ -1,50 +1,21 @@
-# React + TypeScript + Vite
+# React Admin Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+The Admin Dashboard is a comprehensive web application that provides administrators with an intuitive interface for managing various aspects of their organization. Built using React and Material-UI, this dashboard offers a user-friendly experience, allowing users to visualize data and manage tasks efficiently.
 
-Currently, two official plugins are available:
+## Objectives
+- To create a centralized platform for administrators to monitor and manage organizational data.
+- To provide interactive visualizations for better data analysis and decision-making.
+- To enhance user experience through a clean and modern UI design.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Personal Objectives
+- To practice and improve my **React**, **TypeScript**, and **Material-UI** skills.
+- To deepen my understanding of state management and component architecture in React.
+- To explore data visualization techniques and libraries.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Features
+- **Data Visualization**: Interactive charts and graphs (Bar, Pie, Line, and Geo charts) for data representation.
+- **Calendar Integration**: Full-featured calendar for event management, including adding and deleting events.
+- **Sidebar Navigation**: Easy navigation through different application sections.
+- **Dynamic Theme Support**: Light and dark mode themes for user preference.
+- **Data Grids**: Efficiently display and manage data using DataGrid components.
