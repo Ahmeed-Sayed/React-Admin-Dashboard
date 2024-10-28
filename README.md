@@ -1,4 +1,4 @@
-# Project Title: Admin Dashboard
+# React Admin Dashboard
 
 ## Overview
 The Admin Dashboard is a comprehensive web application that provides administrators with an intuitive interface for managing various aspects of their organization. Built using React and Material-UI, this dashboard offers a user-friendly experience, allowing users to visualize data and manage tasks efficiently.
